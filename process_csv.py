@@ -1,6 +1,16 @@
 import pandas as pd
 
+
+
+## modify this string below to match the file name of whatever 
+## your health data CSV's name is
 FILENAME = 'apple_health_export_2024-08-07.csv'
+
+
+
+
+# TODO: convert into functions and also use a main() function
+
 
 #### General Total Processing ####
 ## get csv
@@ -15,12 +25,11 @@ health.dropna(axis=0, how='any', inplace=True)
 ##  from csv properly, so reading it as a string and then casting here
 health['value'] = pd.to_numeric(health['value'])
 
-## print data
-# print(health)
-# print(health.columns)
-
 ## export to csv
+# print(health)
 health.to_csv('processed_' + FILENAME, index=False)
+
+
 
 
 #### StepCount Processing ####
@@ -39,8 +48,29 @@ steps.drop('endDate', axis=1, inplace=True)
 ## merge dates
 steps = pd.DataFrame(steps.groupby('date')['value'].sum())
 
-## print data
+## export to csv
 # print(steps)
+steps.to_csv('processed_steps_' + FILENAME, index=True)
+
+
+
+
+#### HeadphoneAudioExposure Processing ####
+audio = health.loc[health['type'] == 'HeadphoneAudioExposure'].copy()
+
+# get date from endDate
+audio['date'] = pd.to_datetime(audio['endDate'].str[:10])
+
+## get rid of unimportant columns
+audio.drop('type', axis=1, inplace=True)
+audio.drop('unit', axis=1, inplace=True)
+audio.drop('startDate', axis=1, inplace=True)
+audio.drop('endDate', axis=1, inplace=True)
+
+## TODO: fix this average; it does not take into account time spent recording 
+## merge dates
+audio = audio.groupby('date')['value'].agg(['mean', 'min', 'max'])
 
 ## export to csv
-steps.to_csv('processed_steps_' + FILENAME, index=True)
+# print(audio)
+audio.to_csv('processed_audio_' + FILENAME, index=True)
