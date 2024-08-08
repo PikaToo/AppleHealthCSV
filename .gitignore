@@ -1,0 +1,4 @@
+*apple_health_export*
+.venv
+export_cda.xml
+exporter.xml
