@@ -2,25 +2,18 @@ import pandas as pd
 
 FILENAME = 'apple_health_export_2024-08-07.csv'
 
-#### GENERAL TOTAL PROCESSING
+#### General Total Processing ####
 ## get csv
-health = pd.read_csv(FILENAME)
-
-## get rid of unimportant columns
-health.drop('locale', axis=1, inplace=True)
-health.drop('BloodType', axis=1, inplace=True)
-health.drop('CardioFitnessMedicationsUse', axis=1, inplace=True)
-health.drop('BiologicalSex', axis=1, inplace=True)
-health.drop('FitzpatrickSkinType', axis=1, inplace=True)
-health.drop('key', axis=1, inplace=True)
-health.drop('DateOfBirth', axis=1, inplace=True)
-health.drop('creationDate', axis=1, inplace=True)
-health.drop('sourceVersion', axis=1, inplace=True)
-health.drop('sourceName', axis=1, inplace=True)
-health.drop('device', axis=1, inplace=True)
+health = pd.read_csv(FILENAME, 
+                     usecols=['type', 'value', 'unit', 'startDate', 'endDate'],
+                     dtype='string')
 
 ## remove unusable data
 health.dropna(axis=0, how='any', inplace=True)
+
+## cast value to numeric; for some reason not able to do this when reading 
+##  from csv properly, so reading it as a string and then casting here
+health['value'] = pd.to_numeric(health['value'])
 
 ## print data
 # print(health)
@@ -30,9 +23,8 @@ health.dropna(axis=0, how='any', inplace=True)
 health.to_csv('processed_' + FILENAME, index=False)
 
 
-#### STEP COUNTING
+#### StepCount Processing ####
 ## get csv
-# health = pd.read_csv('processed_' + FILENAME)
 steps = health.loc[health['type'] == 'StepCount'].copy()
 
 ## get date from endDate
