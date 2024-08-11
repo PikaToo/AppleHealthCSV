@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 import pandas as pd
 
 
@@ -12,7 +9,7 @@ NIOSH_INSTEAD_OF_OSHA = True
 
 # determines whether days with no measurements are dropped or set as 0
 KEEP_ACTIVITY_NA = True
-KEEP_HEARING_NA = True
+KEEP_HEARING_NA = False
 KEEP_MOBILITY_NA = True
 
 
