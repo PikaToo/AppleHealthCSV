@@ -1,7 +1,6 @@
 import pandas as pd
 
 
-
 # modify this string below to match the file name of your health data CSV's name
 FILENAME = 'apple_health_export_2024-08-07.csv'
 
@@ -16,6 +15,12 @@ KEEP_MOBILITY_NA = True
 
 #### General Total Processing ####
 def get_times_and_data():
+    """
+    This converts the provided file into a pandas DataFrame containing only required data, and also
+    generates a DataFrame that ranges from the earliest time measured to the latest time measured. 
+    
+    These two DataFrames are used in all other functions. 
+    """
     ## get csv
     total_data = pd.read_csv(FILENAME, dtype='string', usecols=['type', 'value', 'unit', 'startDate', 'endDate'])
 
@@ -30,6 +35,7 @@ def get_times_and_data():
     ##  from csv initially, so reading it as a string and then casting here
     total_data['value'] = pd.to_numeric(total_data['value'])
 
+    ## get earliest and latest date to create time_indices DataFrame
     earliest_date = total_data['startDate'].min().date()
     latest_date = total_data['endDate'].max().date()
 
