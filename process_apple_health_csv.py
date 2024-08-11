@@ -9,7 +9,7 @@ NIOSH_INSTEAD_OF_OSHA = True
 
 # determines whether days with no measurements are dropped or set as 0
 KEEP_ACTIVITY_NA = True
-KEEP_HEARING_NA = False
+KEEP_HEARING_NA = True
 KEEP_MOBILITY_NA = True
 
 
@@ -87,7 +87,8 @@ def activity(timestamps, data):
     if KEEP_ACTIVITY_NA:
         activity_db.fillna(0, inplace=True)
     else:
-        activity_db.dropna(inplace=True)
+        activity_db.dropna(inplace=True, thresh=2)
+        activity_db.fillna(0, inplace=True)
 
     ## export to csv
     activity_db.to_csv('activity_' + FILENAME, index=False, float_format='%g')
@@ -162,7 +163,8 @@ def hearing(timestamps, data):
     if KEEP_HEARING_NA:
         hearing_db.fillna(0, inplace=True)
     else:
-        hearing_db.dropna(inplace=True)
+        hearing_db.dropna(inplace=True, thresh=2)
+        hearing_db.fillna(0, inplace=True)
     
     ## export to csv
     hearing_db.to_csv('hearing_' + FILENAME, index=False, float_format='%g')
@@ -215,7 +217,8 @@ def mobility(timestamps, data):
     if KEEP_MOBILITY_NA:
         mobility_db.fillna(0, inplace=True)
     else:
-        mobility_db.dropna(inplace=True)
+        mobility_db.dropna(inplace=True, thresh=2)
+        mobility_db.fillna(0, inplace=True)
 
     ## export to csv
     mobility_db.to_csv('mobility_' + FILENAME, index=False, float_format='%g')
