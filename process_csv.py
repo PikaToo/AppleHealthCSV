@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 
 
@@ -175,9 +178,6 @@ def mobility(timestamps, data):
     WalkingAsymmetryPercentage.
     
     Like activity, we only use endDate and ignore startDate.
-
-    We REMOVE days with 0 measurements. This is because they make it harder to see trends
-    on line graphs. 
     """
     ## get data we need
     step_length = data.loc[data['type'] == 'WalkingStepLength'].copy()
