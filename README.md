@@ -17,7 +17,7 @@ NIOSH_INSTEAD_OF_OSHA - By default, your processed HeadphoneAudioExposure will i
 KEEP_ACTIVITY_NA / KEEP_HEARING_NA / KEEP_MOBILITY_NA - by default, you will have empty rows for each date in which no measurements were recorded. The starting date will be determined by the earliest date any measurement occured, and the last date as the latest date any measurement occured. You can instead have all of these empty rows be removed by setting these parameters to False. 
 
 ### 3 - Run The File
-Ensure that the CSV file from Jameno's script is in the same folder as the process_csv.py script and then run the script. 
+Ensure that the CSV file from Jameno's script is in the same folder as the process_apple_health_csv.py script and then run the script. 
 
 ## Files Generated
 The script only processes the following types of measurements and ignores all others: StepCount, DistanceWalkingRunning, FlightsClimbed, HeadphoneAudioExposure, WalkingStepLength, WalkingSpeed, WalkingDoubleSupportPercentage, and WalkingAsymmetryPercentage.
