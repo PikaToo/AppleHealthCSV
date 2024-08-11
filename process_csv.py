@@ -85,7 +85,7 @@ def activity(timestamps, data):
     activity_db = pd.merge(activity_db, steps, on='Date', how='left')
     activity_db = pd.merge(activity_db, distance, on='Date', copy=False, how='left')
     activity_db = pd.merge(activity_db, flights, on='Date', copy=False, how='left')
-    activity_db.columns = ['Date', 'Steps Taken (count)', 'Distance Walked (km)', 'Flights Climbed (count)']
+    activity_db.columns = ['Date', 'Steps Taken (count)', 'Distance Walked', 'Flights Climbed (count)']
 
     if KEEP_ACTIVITY_NA:
         activity_db.fillna(0, inplace=True)
@@ -212,7 +212,7 @@ def mobility(timestamps, data):
     mobility_db.columns = [ 'Date',
                             'Mean Step Length', 'Minimum Step Length', 'Maximum Step Length',
                             'Mean Walking Speed', 'Minimum Walking Speed', 'Maximum Walking Speed',
-                            'Mean Double Support', 'Minimum Double Support', 'Maximum Double Support',
+                            'Mean Double Support (%)', 'Minimum Double Support (%)', 'Maximum Double Support (%)',
                             'Mean Walking Asymmetry' ]
 
     if KEEP_MOBILITY_NA:
