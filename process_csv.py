@@ -213,7 +213,7 @@ def mobility(timestamps, data):
                             'Mean Step Length', 'Minimum Step Length', 'Maximum Step Length',
                             'Mean Walking Speed', 'Minimum Walking Speed', 'Maximum Walking Speed',
                             'Mean Double Support (%)', 'Minimum Double Support (%)', 'Maximum Double Support (%)',
-                            'Mean Walking Asymmetry' ]
+                            'Mean Walking Asymmetry (%)' ]
 
     if KEEP_MOBILITY_NA:
         mobility_db.fillna(0, inplace=True)
