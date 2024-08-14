@@ -39,7 +39,7 @@ Date** - the date at which the measured values occured.
 
 Average dB - the average dB over all measured dB levels recorded that day. 
 
->xx dB (hours) - the time spent above xx dB that day in hours. Can swap between NIOSH and OSHA groupings with the NIOSH_INSTEAD_OF_OSHA parameter.
+\>xx dB (hours) - the time spent above xx dB that day in hours. Can swap between NIOSH and OSHA groupings with the NIOSH_INSTEAD_OF_OSHA parameter.
 
 
 ### mobility_FILENAME
